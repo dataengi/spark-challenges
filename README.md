@@ -34,3 +34,13 @@ or with cluster resouses tweak (3 executors with 3 cores each)
 ```
 spark-submit --class DataSkew --master yarn --deploy-mode client --num-executors 3 --driver-memory 1G --executor-memory 3G --executor-cores 3 sparkchallenges-assembly-0.1.jar
 ```
+
+References
+
+- Ayan Ray. «Big data skew». Data & Analytics, 05:25:39 UTC. https://www.slideshare.net/ayanray4/big-data-skew-64549151.
+«Balancing Spark – Bin Packing to Solve Data Skew». Silverpond (blog), 05, October 2016. https://silverpond.com.au/2016/10/06/balancing-spark/.
+- Gao, Yufei, Yanjie Zhou, Bing Zhou, Lei Shi, і Jiacai Zhang. «Handling Data Skew in MapReduce Cluster by Using Partition Tuning». Journal of Healthcare Engineering 2017 (2017). https://doi.org/10.1155/2017/1425102.
+- «Handling Data Skew Adaptively In Spark Using Dynamic Repartitioning». Databricks (blog). Accessed 07, November 2018. https://databricks.com/session/handling-data-skew-adaptively-in-spark-using-dynamic-repartitioning.
+- Joins for skewed datasets in Spark. Contribute to tresata/spark-skewjoin development by creating an account on GitHub. Scala. 2015. Reprint, Tresata, 2018. https://github.com/tresata/spark-skewjoin.
+- «Snapshot». Accessed 07, November 2018. https://silverpond.com.au/2016/10/06/balancing-spark/.
+
