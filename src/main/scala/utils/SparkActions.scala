@@ -3,10 +3,11 @@ import org.apache.spark.sql.SparkSession
 
 trait SparkActions {
 
-  def initSpark (appName: String): SparkSession = {
+  def initSpark (appName: String, dynamicAllocation: Boolean = false): SparkSession = {
     SparkSession
       .builder()
       .appName(appName)
+      .config("spark.dynamicAllocation.enabled", dynamicAllocation)
       .getOrCreate()
   }
 

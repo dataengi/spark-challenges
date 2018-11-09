@@ -1,17 +1,24 @@
+import com.typesafe.config.ConfigFactory
 import org.apache.spark.sql.functions.broadcast
 import utils.SparkActions
 
 object DataSkew extends SparkActions {
+  private val config = ConfigFactory.load()
 
-  val appName    = "DataSkewExample"
-  lazy val spark = initSpark(appName)
-
-  // path on hdfs
-  val usersCSV = "/data-sample/Spark+task+attachment+2+-+users.csv.gz"
-  val depsCSV  = "/data-sample/Spark+task+attachment+1+-+deps.csv.gz"
+  private lazy val appName = config.getString("app.name")
+  private lazy val spark   = initSpark(appName)
 
 
   def main(args: Array[String]): Unit = {
+
+    if (args.size < 2) {
+      println ("Error: path to <users-dataset> and <deps-dataset> are required!")
+      System.exit(1)
+    }
+
+    val usersCSV = args(0)
+    val depsCSV  = args(1)
+
 
     // load data
     val depsIn  = spark.read.format("csv").option("header", "true").load(depsCSV)
@@ -20,7 +27,7 @@ object DataSkew extends SparkActions {
 
     // cluster tweak
     val executors   = activeExecutors(spark)
-    val multiFactor = 3
+    val multiFactor = config.getInt("executor.multiFactor")
 
 
     // prepare data
@@ -34,7 +41,8 @@ object DataSkew extends SparkActions {
     val countExpr = users.as('users).join(broadcast(deps).as('deps), joinExp, "inner")
 
     countExpr.explain()
-    countExpr.count()
+
+    println (s"\n\nresult: = ${countExpr.count()}\n\n")
 
   }
 
