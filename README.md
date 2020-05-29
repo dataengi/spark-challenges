@@ -1,7 +1,7 @@
 ## Data skew problem 
 
 ### Problem description
-Running joins of skewed data sets we can face stragglers during execution which slow down whole app. 
+Running joins of skewed data sets we can face stragglers during execution which slow down whole app. Detail description in [the blog post](https://dataengi.com/2019/02/06/spark-data-skew-problem/)
 
 ### Solution
 
